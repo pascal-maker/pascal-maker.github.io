@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chenglou/pretext": "^0.0.3",
     "@copilotkit/react-core": "1.51.0",
     "@copilotkit/react-textarea": "1.51.0",
     "@copilotkit/react-ui": "1.51.0",

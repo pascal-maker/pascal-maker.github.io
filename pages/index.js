@@ -1,4 +1,5 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import {
   AiFillLinkedin,
@@ -6,6 +7,8 @@ import {
 } from "react-icons/ai";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { useState } from "react";
+const CanvasText = dynamic(() => import("../components/CanvasText"), { ssr: false });
+const SkillBubbles = dynamic(() => import("../components/SkillBubbles"), { ssr: false });
 import deved from "../public/valencia.jpg";
 import code from "../public/code.png";
 import design from "../public/fullstack.jpg";
@@ -62,9 +65,15 @@ export default function Home() {
             <h3 className="text-2xl py-2 dark:text-white md:text-3xl">
               Computer Vision Enthousiast.
             </h3>
-            <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 max-w-xl mx-auto md:text-xl">
-              I am a Computer Vision Enthousiast. I use Ultralytics, Label Studio, Docker, React, OpenCV, YOLOv8,Pytorch,Tensorflow,Huggingface,Kaggle and Python.
-            </p>
+            <div className="py-5 max-w-xl mx-auto">
+              <CanvasText
+                text="I am a Computer Vision Enthousiast. I use Ultralytics, Label Studio, Docker, React, OpenCV, YOLOv8, Pytorch, Tensorflow, Huggingface, Kaggle and Python."
+                fontFamily="Poppins, sans-serif"
+                fontSize={18}
+                lineHeight={32}
+                color={darkMode ? '#e5e7eb' : '#1f2937'}
+              />
+            </div>
             <div className="text-5xl flex justify-center gap-16 py-3 text-gray-600 dark:text-gray-400">
               <a href="https://x.com/pascalmusa51964?s=11"><FaXTwitter /></a>
               <a href="https://be.linkedin.com/in/pascal-musabyimana-573b66178"><AiFillLinkedin /></a>
@@ -84,12 +93,24 @@ export default function Home() {
             </div>
 
             <h3 className="text-3xl py-1 dark:text-white">About Me</h3>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              I&apos;m a student at Howest University of Applied Sciences. In my free time, I like to build websites and apps. Let me help you fulfill your dream as an entrepreneur. If you need a landing page, a working proof of concept of a  computer-vision project, or a brand new website for your marketing agency, I&apos;m your guy. Let&apos;s work together to fulfill your potential to the fullest.
-            </p>
-            <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-              I have worked with  a experienced developer  who worked at Meta. I have also collaborated with companies such as Easypost . When it comes to user experience or design, I always try to enhance the user experience based on your target audience.
-            </p>
+            <div className="py-2">
+              <CanvasText
+                text="I'm a student at Howest University of Applied Sciences. In my free time, I like to build websites and apps. Let me help you fulfill your dream as an entrepreneur. If you need a landing page, a working proof of concept of a computer-vision project, or a brand new website for your marketing agency, I'm your guy. Let's work together to fulfill your potential to the fullest."
+                fontFamily="Poppins, sans-serif"
+                fontSize={16}
+                lineHeight={32}
+                color={darkMode ? '#e5e7eb' : '#1f2937'}
+              />
+            </div>
+            <div className="py-2">
+              <CanvasText
+                text="I have worked with an experienced developer who worked at Meta. I have also collaborated with companies such as Easypost. When it comes to user experience or design, I always try to enhance the user experience based on your target audience."
+                fontFamily="Poppins, sans-serif"
+                fontSize={16}
+                lineHeight={32}
+                color={darkMode ? '#e5e7eb' : '#1f2937'}
+              />
+            </div>
             <div className="flex justify-center items-center py-4 border-2 border-gray-300 rounded-lg p-4">
               <a
                 href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-long-time-ago-activity-7345483853223931904-btig?utm_source=share&utm_medium=member_desktop&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
@@ -116,41 +137,39 @@ export default function Home() {
               <h3 className="text-lg font-medium pt-8 pb-2">Coding Languages</h3>
               <p className="py-2">Coding Languages I have used to build my projects.</p>
               <h4 className="py-4 text-teal-600">Languages I Use</h4>
-              <p className="text-gray-800 py-1">JavaScript</p>
-              <p className="text-gray-800 py-1">Objective-C</p>
-              <p className="text-gray-800 py-1">Swift</p>
-              <p className="text-gray-800 py-1">Node.js</p>
-              <p className="text-gray-800 py-1">Python</p>
-              <p className="text-gray-800 py-1">C#</p>
-
+              <SkillBubbles
+                skills={['JavaScript', 'Objective-C', 'Swift', 'Node.js', 'Python', 'C#']}
+                fontFamily="Poppins, sans-serif"
+                fontSize={13}
+                textColor="#0f766e"
+                bgColor="#ccfbf1"
+              />
             </div>
             <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
               <Image src={code} width={100} height={100} alt="" />
               <h3 className="text-lg font-medium pt-8 pb-2">Frameworks</h3>
               <p className="py-2">Do you have an idea for your next great startup? Let&apos;s make it a reality.</p>
               <h4 className="py-4 text-teal-600">Tools & Technologies I Use/Have Used</h4>
-              <p className="text-gray-800 py-1">React</p>
-              <p className="text-gray-800 py-1">Node.js</p>
-              <p className="text-gray-800 py-1">React-Native</p>
-
-              <p className="text-gray-800 py-1">Next.js</p>
-              <p className="text-gray-800 py-1">Langflow</p>
-              <p className="text-gray-800 py-1">Pytorch</p>
-              <p className="text-gray-800 py-1">Ultralytics</p>
-              <p className="text-gray-800 py-1">TensorFlow</p>
-              <p className="text-gray-800 py-1">Huggingface</p>
-              <p className="text-gray-800 py-1">Agentarium</p>
-              <p className="text-gray-800 py-1">Pydantic</p>
-              <p className="text-gray-800 py-1">Swarm</p>
-
-
+              <SkillBubbles
+                skills={['React', 'Node.js', 'React-Native', 'Next.js', 'Langflow', 'Pytorch', 'Ultralytics', 'TensorFlow', 'Huggingface', 'Agentarium', 'Pydantic', 'Swarm']}
+                fontFamily="Poppins, sans-serif"
+                fontSize={13}
+                textColor="#0f766e"
+                bgColor="#ccfbf1"
+              />
             </div>
             <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
               <Image src={consulting} width={100} height={100} alt="" />
               <h3 className="text-lg font-medium pt-8 pb-2">Consulting</h3>
               <p className="py-2">I&apos;m here to help you with your software development needs.</p>
               <h4 className="py-4 text-teal-600">Let&apos;s Talk</h4>
-              <p className="text-gray-800 py-1">I&apos;m available for freelance work. Contact me!</p>
+              <SkillBubbles
+                skills={['Freelance', 'Landing Pages', 'Computer Vision', 'Proof of Concept']}
+                fontFamily="Poppins, sans-serif"
+                fontSize={13}
+                textColor="#0f766e"
+                bgColor="#ccfbf1"
+              />
             </div>
           </div>
 
