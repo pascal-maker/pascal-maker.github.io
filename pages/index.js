@@ -112,6 +112,7 @@ export default function Home() {
                 color={darkMode ? '#e5e7eb' : '#1f2937'}
               />
             </div>
+            <h3 className="text-3xl py-4 dark:text-white">Companies I Worked For</h3>
             <div className="flex justify-center items-center gap-8 py-4 border-2 border-gray-300 rounded-lg p-4">
               <div className="flex flex-col items-center gap-2">
                 <a
