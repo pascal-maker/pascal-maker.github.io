@@ -21,6 +21,7 @@ import web4 from "../public/footage.png";
 import web5 from "../public/braintumordetection.jpg";
 import web6 from "../public/sam2.png";
 import easypostLogo from "../public/0x0.png";
+import sweetspotLogo from "../public/sweetspot-logo.svg";
 import { FaXTwitter, FaEnvelope } from 'react-icons/fa6';
 
 export default function Home() {
@@ -104,29 +105,41 @@ export default function Home() {
             </div>
             <div className="py-2">
               <CanvasText
-                text="I have worked with an experienced developer who worked at Meta. I have also collaborated with companies such as Easypost. When it comes to user experience or design, I always try to enhance the user experience based on your target audience."
+                text="I have worked with an experienced developer who worked at Meta. I have also worked for companies such as Easypost and Sweetspot. When it comes to user experience or design, I always try to enhance the user experience based on your target audience."
                 fontFamily="Poppins, sans-serif"
                 fontSize={16}
                 lineHeight={32}
                 color={darkMode ? '#e5e7eb' : '#1f2937'}
               />
             </div>
-            <div className="flex justify-center items-center py-4 border-2 border-gray-300 rounded-lg p-4">
-              <a
-                href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-long-time-ago-activity-7345483853223931904-btig?utm_source=share&utm_medium=member_desktop&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity duration-200"
-              >
+            <div className="flex justify-center items-center gap-8 py-4 border-2 border-gray-300 rounded-lg p-4">
+              <div className="flex flex-col items-center gap-2">
+                <a
+                  href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-long-time-ago-activity-7345483853223931904-btig?utm_source=share&utm_medium=member_desktop&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-80 transition-opacity duration-200"
+                >
+                  <Image
+                    src={easypostLogo}
+                    width={100}
+                    height={100}
+                    alt="Easypost Company"
+                    className="rounded-lg cursor-pointer border border-gray-400"
+                  />
+                </a>
+                <p className="text-sm text-gray-500">Easypost</p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
                 <Image
-                  src={easypostLogo}
+                  src={sweetspotLogo}
                   width={100}
                   height={100}
-                  alt="Easypost Company"
-                  className="rounded-lg cursor-pointer border border-gray-400"
+                  alt="Sweetspot Company"
+                  className="rounded-lg border border-gray-400"
                 />
-              </a>
-              <p className="text-sm text-gray-500 ml-4">Easypost Logo</p>
+                <p className="text-sm text-gray-500">Sweetspot</p>
+              </div>
             </div>
           </div>
 
