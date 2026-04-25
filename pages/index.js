@@ -164,13 +164,21 @@ export default function Home() {
               <h3 className="text-lg font-medium pt-8 pb-2">Frameworks</h3>
               <p className="py-2">Do you have an idea for your next great startup? Let&apos;s make it a reality.</p>
               <h4 className="py-4 text-teal-600">Tools & Technologies I Use/Have Used</h4>
-              <SkillBubbles
-                skills={['React', 'Node.js', 'React-Native', 'Next.js', 'Langflow', 'Pytorch', 'Ultralytics', 'TensorFlow', 'Huggingface', 'Agentarium', 'Pydantic', 'Swarm']}
-                fontFamily="Poppins, sans-serif"
-                fontSize={13}
-                textColor="#0f766e"
-                bgColor="#ccfbf1"
-              />
+              <p className="text-gray-800 py-1">React</p>
+              <p className="text-gray-800 py-1">Node.js</p>
+              <p className="text-gray-800 py-1">React-Native</p>
+
+              <p className="text-gray-800 py-1">Next.js</p>
+              <p className="text-gray-800 py-1">Langflow</p>
+              <p className="text-gray-800 py-1">Pytorch</p>
+              <p className="text-gray-800 py-1">Ultralytics</p>
+              <p className="text-gray-800 py-1">TensorFlow</p>
+              <p className="text-gray-800 py-1">Huggingface</p>
+              <p className="text-gray-800 py-1">Agentarium</p>
+              <p className="text-gray-800 py-1">Pydantic</p>
+              <p className="text-gray-800 py-1">Swarm</p>
+
+
             </div>
             <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
               <Image src={consulting} width={100} height={100} alt="" />
