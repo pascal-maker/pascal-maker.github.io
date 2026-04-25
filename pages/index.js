@@ -176,6 +176,11 @@ export default function Home() {
               <p className="text-gray-800 py-1">Huggingface</p>
               <p className="text-gray-800 py-1">Agentarium</p>
               <p className="text-gray-800 py-1">Pydantic</p>
+              <p className="text-gray-800 py-1">MCP</p>
+              <p className="text-gray-800 py-1">Docker</p>
+              <p className="text-gray-800 py-1">Langfuse</p>
+              <p className="text-gray-800 py-1">Roboflow</p>
+              <p className="text-gray-800 py-1">OpenCV</p>
               <p className="text-gray-800 py-1">Swarm</p>
 
 
