@@ -17,7 +17,7 @@ import Image from "next/image";
 import web1 from "../public/kanyesax.png";
 import web2 from "../public/mriscans.png";
 import web3 from "../public/segmentfetus.png";
-import web4 from "../public/IMG_9814.jpeg";
+import web4 from "../public/JPEG image 2.jpeg";
 import web5 from "../public/braintumordetection.jpg";
 import web6 from "../public/sam2.png";
 import easypostLogo from "../public/0x0.png";
