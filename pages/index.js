@@ -27,7 +27,7 @@ import { FaXTwitter, FaEnvelope } from 'react-icons/fa6';
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const router = useRouter();
-  const resumeHref = `${router.basePath}/resumeupdated.pdf`;
+  const resumeHref = `${router.basePath}/Pascal_Musabyimana_CV_EN_NL (1).pdf`;
 
   return (
     <div className={darkMode ? "dark" : ""}>
