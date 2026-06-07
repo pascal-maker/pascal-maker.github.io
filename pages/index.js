@@ -213,15 +213,18 @@ export default function Home() {
               <a href="https://huggingface.co/pascal-maker" target="_blank" rel="noopener noreferrer" className="text-3xl transition-transform duration-200 hover:scale-110 sm:text-4xl" title="Hugging Face Profile">🤗</a>
             </div>
 
-            <div className="relative mx-auto mt-12 h-[22rem] w-full max-w-[18rem] overflow-hidden rounded-[2rem] bg-gradient-to-b from-teal-500 shadow-xl shadow-teal-500/20 sm:h-[26rem] sm:max-w-[20rem] md:mt-16 md:h-[32rem] md:max-w-[24rem]">
-              <Image
-                src={deved}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center top"
-                alt=""
-                sizes="(max-width: 768px) 80px, (max-width: 1024px) 96px, 192px"
-              />
+            <div className="mx-auto mt-12 w-full max-w-[18rem] rounded-[2.25rem] bg-gradient-to-b from-cyan-400 via-teal-500 to-cyan-600 p-2 shadow-[0_20px_60px_rgba(20,184,166,0.28)] sm:max-w-[20rem] md:mt-16 md:max-w-[24rem]">
+              <div className="relative h-[22rem] w-full overflow-hidden rounded-[1.85rem] bg-slate-100 dark:bg-slate-800 sm:h-[26rem] md:h-[32rem]">
+                <Image
+                  src={deved}
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center top"
+                  alt="Portrait of Pascal Musabyimana"
+                  className="block"
+                  sizes="(max-width: 640px) 18rem, (max-width: 768px) 20rem, 24rem"
+                />
+              </div>
             </div>
 
             <h3 id="about" className="py-1 text-3xl dark:text-white">About Me</h3>
