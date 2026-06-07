@@ -217,7 +217,8 @@ export default function Home() {
               <Image
                 src={deved}
                 layout="fill"
-                objectFit="contain"
+                objectFit="cover"
+                objectPosition="center top"
                 alt=""
                 sizes="(max-width: 768px) 80px, (max-width: 1024px) 96px, 192px"
               />
