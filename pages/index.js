@@ -28,6 +28,7 @@ import { FaXTwitter, FaEnvelope } from 'react-icons/fa6';
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const router = useRouter();
   const resumeHref = `${router.basePath}/Pascal_Musabyimana_CV_EN_NL (1).pdf`;
   const navigationItems = [
@@ -45,6 +46,7 @@ export default function Home() {
   }, [isMenuOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const closeDesktopMenu = () => setIsDesktopMenuOpen(false);
 
   return (
     <div className={darkMode ? "dark" : ""}>
@@ -60,16 +62,46 @@ export default function Home() {
               developedbypascalmusabyimana
             </h1>
 
-            <div className="hidden items-center gap-6 md:flex">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-gray-600 transition-colors hover:text-teal-600 dark:text-gray-200 dark:hover:text-teal-400"
-                >
-                  {item.label}
-                </a>
-              ))}
+            <div className="relative hidden items-center gap-4 md:flex">
+              <button
+                type="button"
+                onClick={() => setIsDesktopMenuOpen((open) => !open)}
+                aria-label="Toggle navigation menu"
+                aria-expanded={isDesktopMenuOpen}
+                className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-teal-500 hover:text-teal-600 dark:border-gray-700 dark:text-gray-200 dark:hover:text-teal-400"
+              >
+                <HiBars3 className="text-lg" />
+                Menu
+              </button>
+              {isDesktopMenuOpen && (
+                <div className="absolute right-[11rem] top-14 z-50 w-56 rounded-3xl border border-gray-200 bg-white p-3 shadow-2xl dark:border-gray-700 dark:bg-gray-900">
+                  <div className="mb-2 flex items-center justify-between px-2 pt-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-teal-600 dark:text-teal-400">
+                      Navigate
+                    </p>
+                    <button
+                      type="button"
+                      onClick={closeDesktopMenu}
+                      aria-label="Close navigation menu"
+                      className="rounded-full border border-gray-200 p-1 text-xl text-gray-900 dark:border-gray-700 dark:text-white"
+                    >
+                      <HiXMark />
+                    </button>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {navigationItems.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        onClick={closeDesktopMenu}
+                        className="rounded-2xl px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-teal-50 hover:text-teal-600 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-teal-400"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
               <button
                 type="button"
                 onClick={() => setDarkMode(!darkMode)}
@@ -243,8 +275,16 @@ export default function Home() {
           </div>
 
           {/* Skills Section */}
-          <div id="skills" className="gap-10 lg:flex">
-            <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
+          <section id="skills" className="scroll-mt-28 py-6">
+            <div className="mb-6 text-center">
+              <h3 className="py-1 text-3xl dark:text-white">Skills</h3>
+              <p className="mx-auto max-w-2xl py-2 text-md leading-8 text-gray-800 dark:text-gray-200">
+                Everything I use across product work, engineering, and consulting.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+              <div className="my-4 flex h-full flex-col rounded-xl p-10 text-center shadow-lg dark:bg-white">
               <Image src={design} width={100} height={100} alt="" />
               <h3 className="text-lg font-medium pt-8 pb-2">Coding Languages</h3>
               <p className="py-2">Coding Languages I have used to build my projects.</p>
@@ -256,47 +296,45 @@ export default function Home() {
                 textColor="#0f766e"
                 bgColor="#ccfbf1"
               />
+              </div>
+              <div className="my-4 flex h-full flex-col rounded-xl p-10 text-center shadow-lg dark:bg-white">
+                <Image src={code} width={100} height={100} alt="" />
+                <h3 className="text-lg font-medium pt-8 pb-2">Frameworks</h3>
+                <p className="py-2">Do you have an idea for your next great startup? Let&apos;s make it a reality.</p>
+                <h4 className="py-4 text-teal-600">Tools & Technologies I Use/Have Used</h4>
+                <p className="text-gray-800 py-1">React</p>
+                <p className="text-gray-800 py-1">Node.js</p>
+                <p className="text-gray-800 py-1">React-Native</p>
+                <p className="text-gray-800 py-1">Next.js</p>
+                <p className="text-gray-800 py-1">Langflow</p>
+                <p className="text-gray-800 py-1">Pytorch</p>
+                <p className="text-gray-800 py-1">Ultralytics</p>
+                <p className="text-gray-800 py-1">TensorFlow</p>
+                <p className="text-gray-800 py-1">Huggingface</p>
+                <p className="text-gray-800 py-1">Agentarium</p>
+                <p className="text-gray-800 py-1">Pydantic</p>
+                <p className="text-gray-800 py-1">MCP</p>
+                <p className="text-gray-800 py-1">Docker</p>
+                <p className="text-gray-800 py-1">Langfuse</p>
+                <p className="text-gray-800 py-1">Roboflow</p>
+                <p className="text-gray-800 py-1">OpenCV</p>
+                <p className="text-gray-800 py-1">Swarm</p>
+              </div>
+              <div className="my-4 flex h-full flex-col rounded-xl p-10 text-center shadow-lg dark:bg-white">
+                <Image src={consulting} width={100} height={100} alt="" />
+                <h3 className="text-lg font-medium pt-8 pb-2">Consulting</h3>
+                <p className="py-2">I&apos;m here to help you with your software development needs.</p>
+                <h4 className="py-4 text-teal-600">Let&apos;s Talk</h4>
+                <SkillBubbles
+                  skills={['Freelance', 'Landing Pages', 'Computer Vision', 'Proof of Concept']}
+                  fontFamily="Poppins, sans-serif"
+                  fontSize={13}
+                  textColor="#0f766e"
+                  bgColor="#ccfbf1"
+                />
+              </div>
             </div>
-            <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
-              <Image src={code} width={100} height={100} alt="" />
-              <h3 className="text-lg font-medium pt-8 pb-2">Frameworks</h3>
-              <p className="py-2">Do you have an idea for your next great startup? Let&apos;s make it a reality.</p>
-              <h4 className="py-4 text-teal-600">Tools & Technologies I Use/Have Used</h4>
-              <p className="text-gray-800 py-1">React</p>
-              <p className="text-gray-800 py-1">Node.js</p>
-              <p className="text-gray-800 py-1">React-Native</p>
-
-              <p className="text-gray-800 py-1">Next.js</p>
-              <p className="text-gray-800 py-1">Langflow</p>
-              <p className="text-gray-800 py-1">Pytorch</p>
-              <p className="text-gray-800 py-1">Ultralytics</p>
-              <p className="text-gray-800 py-1">TensorFlow</p>
-              <p className="text-gray-800 py-1">Huggingface</p>
-              <p className="text-gray-800 py-1">Agentarium</p>
-              <p className="text-gray-800 py-1">Pydantic</p>
-              <p className="text-gray-800 py-1">MCP</p>
-              <p className="text-gray-800 py-1">Docker</p>
-              <p className="text-gray-800 py-1">Langfuse</p>
-              <p className="text-gray-800 py-1">Roboflow</p>
-              <p className="text-gray-800 py-1">OpenCV</p>
-              <p className="text-gray-800 py-1">Swarm</p>
-
-
-            </div>
-            <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
-              <Image src={consulting} width={100} height={100} alt="" />
-              <h3 className="text-lg font-medium pt-8 pb-2">Consulting</h3>
-              <p className="py-2">I&apos;m here to help you with your software development needs.</p>
-              <h4 className="py-4 text-teal-600">Let&apos;s Talk</h4>
-              <SkillBubbles
-                skills={['Freelance', 'Landing Pages', 'Computer Vision', 'Proof of Concept']}
-                fontFamily="Poppins, sans-serif"
-                fontSize={13}
-                textColor="#0f766e"
-                bgColor="#ccfbf1"
-              />
-            </div>
-          </div>
+          </section>
 
           {/* Portfolio Section */}
           <h3 id="portfolio" className="py-1 text-3xl dark:text-white">My Portfolio</h3>
