@@ -30,7 +30,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const router = useRouter();
-  const resumeHref = `${router.basePath}/Pascal_Musabyimana_CV_EN_NL (1).pdf`;
+  const resumeHref = `${router.basePath}/Pascal_Musabyimana_Resume_Updated.pdf`;
   const navigationItems = [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
@@ -289,17 +289,17 @@ export default function Home() {
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
               <div className="my-4 flex h-full flex-col rounded-xl p-10 text-center shadow-lg dark:bg-white">
-              <Image src={design} width={100} height={100} alt="" />
-              <h3 className="text-lg font-medium pt-8 pb-2">Coding Languages</h3>
-              <p className="py-2">Coding Languages I have used to build my projects.</p>
-              <h4 className="py-4 text-teal-600">Languages I Use</h4>
-              <SkillBubbles
-                skills={['JavaScript', 'Objective-C', 'Swift', 'Node.js', 'Python', 'C#']}
-                fontFamily="Poppins, sans-serif"
-                fontSize={13}
-                textColor="#0f766e"
-                bgColor="#ccfbf1"
-              />
+                <Image src={design} width={100} height={100} alt="" />
+                <h3 className="text-lg font-medium pt-8 pb-2">Coding Languages</h3>
+                <p className="py-2">Coding Languages I have used to build my projects.</p>
+                <h4 className="py-4 text-teal-600">Languages I Use</h4>
+                <SkillBubbles
+                  skills={['JavaScript', 'Objective-C', 'Swift', 'Node.js', 'Python', 'C#']}
+                  fontFamily="Poppins, sans-serif"
+                  fontSize={13}
+                  textColor="#0f766e"
+                  bgColor="#ccfbf1"
+                />
               </div>
               <div className="my-4 flex h-full flex-col rounded-xl p-10 text-center shadow-lg dark:bg-white">
                 <Image src={code} width={100} height={100} alt="" />
