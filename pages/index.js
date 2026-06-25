@@ -23,6 +23,7 @@ import web5 from "../public/braintumordetection.jpg";
 import web6 from "../public/sam2.png";
 import easypostLogo from "../public/0x0.png";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
+import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import { FaXTwitter, FaEnvelope } from 'react-icons/fa6';
 
 export default function Home() {
@@ -246,8 +247,8 @@ export default function Home() {
                 color={darkMode ? '#e5e7eb' : '#1f2937'}
               />
             </div>
-            <h3 className="py-4 text-3xl dark:text-white">Companies I Worked For</h3>
-            <div className="flex flex-col items-center justify-center gap-8 rounded-2xl border border-gray-300 p-6 sm:flex-row">
+            <h3 className="py-4 text-3xl dark:text-white">Companies / Organizations I Worked With</h3>
+            <div className="flex flex-col flex-wrap items-center justify-center gap-8 rounded-2xl border border-gray-300 p-6 sm:flex-row">
               <div className="flex flex-col items-center gap-2">
                 <a
                   href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-long-time-ago-activity-7345483853223931904-btig?utm_source=share&utm_medium=member_desktop&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
@@ -274,6 +275,31 @@ export default function Home() {
                   className="rounded-lg border border-gray-400"
                 />
                 <p className="text-sm text-gray-500">Sweetspot</p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <a
+                  href="https://off-the-radar.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-80 transition-opacity duration-200"
+                >
+                  <Image
+                    src={offTheRadarPhoto}
+                    width={100}
+                    height={100}
+                    alt="Off the Radar event poster"
+                    className="rounded-lg border border-gray-400 object-cover"
+                  />
+                </a>
+                <p className="text-center text-sm text-gray-500">Off the Radar</p>
+                <a
+                  href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_6-weeks-ago-8-people-met-for-brunch-no-activity-7475425902408093696-perX?utm_source=share&utm_medium=member_ios&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-teal-600 transition-colors hover:text-teal-500"
+                >
+                  View LinkedIn post
+                </a>
               </div>
             </div>
           </div>
