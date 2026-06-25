@@ -281,7 +281,7 @@ export default function Home() {
                   href="https://off-the-radar.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:opacity-80 transition-opacity duration-200"
+                  className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity duration-200"
                 >
                   <Image
                     src={offTheRadarPhoto}
@@ -290,15 +290,7 @@ export default function Home() {
                     alt="Off the Radar event poster"
                     className="rounded-lg border border-gray-400 object-cover"
                   />
-                </a>
-                <p className="text-center text-sm text-gray-500">Off the Radar</p>
-                <a
-                  href="https://www.linkedin.com/posts/pascal-musabyimana-573b66178_6-weeks-ago-8-people-met-for-brunch-no-activity-7475425902408093696-perX?utm_source=share&utm_medium=member_ios&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-teal-600 transition-colors hover:text-teal-500"
-                >
-                  View LinkedIn post
+                  <p className="text-center text-sm text-gray-500">Off the Radar</p>
                 </a>
               </div>
             </div>
