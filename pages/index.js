@@ -31,7 +31,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const router = useRouter();
-  const resumeHref = `${router.basePath}/Pascal_Musabyimana_Resume_Updated.pdf`;
+  const resumeHref = `${router.basePath}/Pascal_Musabyimana_Resume_EN.pdf`;
   const navigationItems = [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
