@@ -1,0 +1,30 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "2b9673187dfe",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "pages/index.js",
+    "public/Pascal_Musabyimana_CV_EN_NL (1).pdf",
+    "public/Pascal_Musabyimana_Resume_EN.pdf",
+    "public/Pascal_Musabyimana_Resume_Updated.pdf",
+    "public/resumeperfect.pdf",
+    "public/resumeupdated.pdf"
+  ],
+  "sessions": [
+    {
+      "metadata": "/2b/9673187dfe/0/metadata.json",
+      "transcript": "/2b/9673187dfe/0/full.jsonl",
+      "content_hash": "/2b/9673187dfe/0/content_hash.txt",
+      "prompt": "/2b/9673187dfe/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 177610,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1183232,
+    "output_tokens": 9416,
+    "api_call_count": 32
+  }
+}
