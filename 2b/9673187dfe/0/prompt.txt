@@ -1,15 +1,1 @@
-check the hooks  Pascal_Musabyimana_Resume_EN.pdf and make sure this   const resumeHref = `${router.basePath}/Pascal_Musabyimana_Resume_EN.pdf`;
- this pdf is actually the pdf being pshed check if there duplciates of this one located outside of the folder of cvpascals
-
----
-
-remove these older d other older resume
-  PDFs outside that folder, like Pascal_Musabyimana_Resume_Updated.pdf, temove these folders
-
----
-
-they can stay]
-
----
-
-its pushef
+ye scommit and push please
