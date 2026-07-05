@@ -102,6 +102,7 @@ const portfolioItems = [
       "Filmed an FC Berdi indoor soccer match and trained YOLOv8 on the footage to detect players and the ball — custom dataset labeled in Roboflow, training tracked with ClearML, detection on single frames and full video.",
     href: "https://universe.roboflow.com/pascalmaker/fcberdi",
     image: portfolioVisionDemo,
+    video: "/fcberdi-detection.mp4",
     alt: "Player and ball detection on FC Berdi indoor soccer match footage",
     tags: ["YOLOv8", "Roboflow", "Sports analytics"],
   },
@@ -514,14 +515,22 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {portfolioItems.map((item) => (
-              <a
-                key={item.title}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1 dark:border-gray-800 dark:bg-gray-950"
-              >
+            {portfolioItems.map((item) => {
+              const media = item.video ? (
+                <div className="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800">
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <video
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={item.image.src}
+                    aria-label={item.alt}
+                    className="h-full w-full object-cover"
+                  >
+                    <source src={item.video} type="video/mp4" />
+                  </video>
+                </div>
+              ) : (
                 <div className="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800">
                   <Image
                     src={item.image}
@@ -531,6 +540,9 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   />
                 </div>
+              );
+
+              const body = (
                 <div className="p-5">
                   <h3 className="text-xl font-semibold text-gray-950 group-hover:text-teal-700 dark:text-white dark:group-hover:text-teal-300">
                     {item.title}
@@ -547,8 +559,31 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-              </a>
-            ))}
+              );
+
+              const cardClass =
+                "group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1 dark:border-gray-800 dark:bg-gray-950";
+
+              return item.video ? (
+                <article key={item.title} className={cardClass}>
+                  {media}
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="block">
+                    {body}
+                  </a>
+                </article>
+              ) : (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClass}
+                >
+                  {media}
+                  {body}
+                </a>
+              );
+            })}
           </div>
         </section>
 
