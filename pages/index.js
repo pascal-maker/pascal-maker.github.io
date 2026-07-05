@@ -138,7 +138,7 @@ const organizations = [
   {
     name: "Easypost",
     image: easypostLogo,
-    href: "https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-long-time-ago-activity-7345483853223931904-btig?utm_source=share&utm_medium=member_desktop&rcm=ACoAACoslacB56MwdRN6bL1P1uM5qLdxwYzUcg8",
+    href: "https://www.easypost.eu/nl-BE",
     alt: "Easypost logo",
   },
   {
