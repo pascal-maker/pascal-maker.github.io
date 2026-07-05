@@ -1,0 +1,32 @@
+<task>
+Implement the approved website overhaul plan in /Users/pascal-maker/.claude/plans/distributed-drifting-wigderson.md (read it first; it is the authoritative spec) for the repo at /Users/pascal-maker/developedbypascalmusabyimana. You have write access this time — a previous read-only attempt made no changes.
+
+Execution notes on top of the plan:
+- Work on a new branch client-acquisition-overhaul off main; commit in logical chunks; do NOT push.
+- Ignore CLAUDE.md's .agent/ protocol — that directory does not exist in this repo.
+- Image compression: use macOS sips (available) to resize/re-encode; cwebp may not be installed. Portfolio images max ~1200px wide, portrait ~800px, icons/logos ~200px. Update imports in pages/index.js if filenames/extensions change (also rename "JPEG image 2.jpeg" to a sane name). Create public/og-image.jpg at 1200x630.
+- Only delete public/ assets after grep-verifying they are unreferenced in pages/, components/, styles/ (out/ is gitignored build output, ignore it).
+- package.json: also remove now-unused @chenglou/pretext, plus stray deps build, next-routes, tailwind (v4 stray — real one is devDependency tailwindcss 3), postcss-load-config if unreferenced; set eslint-config-next to match next 16.1.5. Run yarn install after editing.
+- Use placeholders with TODO comments for the Formspree form ID (https://formspree.io/f/YOUR_FORM_ID) and GA4 measurement ID (render GA scripts only when the ID constant is non-empty).
+- Contact email stays pascal-musa@hotmail.com. Hero positioning: "AI & Computer Vision Engineer" (fix the "Enthousiast" typo everywhere).
+</task>
+
+<verification_loop>
+Verify at the end and include results in your final report:
+- yarn build succeeds.
+- grep out/index.html for the OG/Twitter/JSON-LD tags and the real hero text.
+- Report du -sh out before and after image work.
+- List all changed/deleted files.
+</verification_loop>
+
+<action_safety>
+Stay within the plan's scope. No unrelated refactors. Do not push. Delete assets only after grep-verifying they are unreferenced in pages/, components/, styles/.
+</action_safety>
+
+<default_follow_through_policy>
+Proceed without asking routine questions; use the placeholder/TODO conventions above where real IDs are unknown. If the plan file is missing or unreadable, stop and report that instead of guessing.
+</default_follow_through_policy>
+
+<compact_output_contract>
+Final report: branch name, commits made, verification results (build status, grep hits, du -sh before/after), full changed/deleted file list, and any TODOs left for the user.
+</compact_output_contract>
