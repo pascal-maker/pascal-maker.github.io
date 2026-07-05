@@ -5,7 +5,7 @@ import { useForm, ValidationError } from "@formspree/react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { FaEnvelope, FaXTwitter } from "react-icons/fa6";
-import { HiBars3, HiXMark } from "react-icons/hi2";
+import { HiBars3, HiXMark, HiOutlineEye, HiOutlineCpuChip, HiOutlineGlobeAlt } from "react-icons/hi2";
 import { SiHuggingface } from "react-icons/si";
 
 import deved from "../public/valencia.jpg";
@@ -49,18 +49,24 @@ const serviceCards = [
     description:
       "Rapid prototypes for detection, segmentation, and model-assisted workflows that show whether an AI idea can work in the real world.",
     tools: ["YOLOv8", "SAM 2", "OpenCV", "Roboflow"],
+    icon: HiOutlineEye,
+    iconWrapClass: "bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300",
   },
   {
     title: "AI Solutions & Integrations",
     description:
       "Practical AI features, evaluation loops, and automation flows for teams that need useful output instead of demos that only look impressive.",
     tools: ["Python", "Next.js", "Docker", "Langfuse"],
+    icon: HiOutlineCpuChip,
+    iconWrapClass: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
   },
   {
     title: "Websites & Landing Pages",
     description:
       "Focused pages for founders, creators, and small teams that need a clear offer, a sharp visual presentation, and a path to contact.",
     tools: ["React", "SEO", "UX", "Conversion"],
+    icon: HiOutlineGlobeAlt,
+    iconWrapClass: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
   },
 ];
 
@@ -122,7 +128,7 @@ const testimonials = [
     quote:
       "It was a real pleasure having you in our IT department. Your enthusiasm was contagious, and your innovative mindset brought fresh energy to our team. The experiments you conducted pushed our AI capabilities a step forward—both useful in application and bold in approach. Your contributions were a perfect blend of technical depth and curiosity. Wishing you the best in what comes next. Keep experimenting!",
     name: "Harold Kerckhaert",
-    role: "IT Director",
+    role: "IT Director, EasyPost",
     image: haroldPhoto,
   },
 ];
@@ -429,7 +435,9 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {serviceCards.map((service) => (
               <article key={service.title} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-                <div className="mb-5 h-12 w-12 rounded-lg bg-teal-100 dark:bg-teal-950" />
+                <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-lg ${service.iconWrapClass}`}>
+                  <service.icon className="text-2xl" aria-hidden="true" />
+                </div>
                 <h3 className="text-xl font-semibold text-gray-950 dark:text-white">{service.title}</h3>
                 <p className="mt-3 leading-7 text-gray-700 dark:text-gray-300">{service.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
