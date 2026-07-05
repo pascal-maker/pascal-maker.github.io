@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { FaEnvelope, FaXTwitter } from "react-icons/fa6";
@@ -20,8 +21,7 @@ import web6 from "../public/sam2.jpg";
 
 const siteUrl = "https://pascal-maker.github.io/";
 const email = "pascal-musa@hotmail.com";
-// TODO: Replace YOUR_FORM_ID with Pascal's real Formspree form ID.
-const formspreeAction = "https://formspree.io/f/YOUR_FORM_ID";
+const formspreeFormId = "mjgqlrde";
 
 const navigationItems = [
   { label: "Services", href: "#services" },
@@ -116,7 +116,12 @@ const portfolioItems = [
 ];
 
 const testimonials = [
-  // TODO: Add 1-2 real client quotes when Pascal has approved testimonials.
+  {
+    quote:
+      "It was a real pleasure having you in our IT department. Your enthusiasm was contagious, and your innovative mindset brought fresh energy to our team. The experiments you conducted pushed our AI capabilities a step forward—both useful in application and bold in approach. Your contributions were a perfect blend of technical depth and curiosity. Wishing you the best in what comes next. Keep experimenting!",
+    name: "Harold Kerckhaert",
+    role: "IT Director",
+  },
 ];
 
 const organizations = [
@@ -153,6 +158,7 @@ const jsonLd = {
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
+  const [formState, handleFormSubmit] = useForm(formspreeFormId);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const resumeHref = "/Pascal_Musabyimana_Resume_EN.pdf";
@@ -544,7 +550,10 @@ export default function Home() {
                   <blockquote className="leading-8 text-gray-700 dark:text-gray-300">
                     {testimonial.quote}
                   </blockquote>
-                  <figcaption className="mt-4 font-semibold">{testimonial.name}</figcaption>
+                  <figcaption className="mt-4">
+                    <span className="font-semibold text-gray-950 dark:text-white">{testimonial.name}</span>
+                    <span className="block text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</span>
+                  </figcaption>
                 </figure>
               ))}
             </div>
@@ -573,51 +582,64 @@ export default function Home() {
               </div>
             </div>
 
-            <form
-              action={formspreeAction}
-              method="POST"
-              className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-            >
-              <input type="hidden" name="_subject" value="New project inquiry from pascal-maker.github.io" />
-              <div className="grid gap-5">
-                <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
-                  Name
-                  <input
-                    required
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
-                  />
-                </label>
-                <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
-                  Email
-                  <input
-                    required
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
-                  />
-                </label>
-                <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
-                  Message
-                  <textarea
-                    required
-                    name="message"
-                    rows={6}
-                    className="resize-y rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
-                    placeholder="Tell me what you want to build or validate."
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="rounded-lg bg-teal-600 px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-teal-700"
-                >
-                  Send message
-                </button>
+            {formState.succeeded ? (
+              <div className="flex flex-col justify-center rounded-lg border border-teal-200 bg-teal-50 p-8 text-center dark:border-teal-900 dark:bg-teal-950">
+                <p className="text-xl font-semibold text-teal-800 dark:text-teal-200">Thanks for your message!</p>
+                <p className="mt-3 leading-7 text-teal-700 dark:text-teal-300">
+                  I&apos;ll get back to you by email as soon as possible.
+                </p>
               </div>
-            </form>
+            ) : (
+              <form
+                onSubmit={handleFormSubmit}
+                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
+              >
+                <input type="hidden" name="_subject" value="New project inquiry from pascal-maker.github.io" />
+                <div className="grid gap-5">
+                  <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
+                    Name
+                    <input
+                      required
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
+                    />
+                    <ValidationError prefix="Name" field="name" errors={formState.errors} className="text-sm text-red-600 dark:text-red-400" />
+                  </label>
+                  <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
+                    Email
+                    <input
+                      required
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
+                    />
+                    <ValidationError prefix="Email" field="email" errors={formState.errors} className="text-sm text-red-600 dark:text-red-400" />
+                  </label>
+                  <label className="grid gap-2 text-sm font-medium text-gray-800 dark:text-gray-200">
+                    Message
+                    <textarea
+                      required
+                      name="message"
+                      rows={6}
+                      className="resize-y rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-950 outline-none transition-colors focus:border-teal-600 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
+                      placeholder="Tell me what you want to build or validate."
+                    />
+                    <ValidationError prefix="Message" field="message" errors={formState.errors} className="text-sm text-red-600 dark:text-red-400" />
+                  </label>
+                  <button
+                    type="submit"
+                    disabled={formState.submitting}
+                    className="rounded-lg bg-teal-600 px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {formState.submitting ? "Sending..." : "Send message"}
+                  </button>
+                  <ValidationError errors={formState.errors} className="text-sm text-red-600 dark:text-red-400" />
+                </div>
+              </form>
+            )}
           </div>
         </section>
       </main>
