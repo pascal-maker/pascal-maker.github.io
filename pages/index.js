@@ -91,12 +91,13 @@ const portfolioItems = [
     tags: ["Segmentation", "Meta", "Computer vision"],
   },
   {
-    title: "Applied AI Project Update",
-    description: "A public progress post documenting applied AI learning and project execution.",
-    href: "https://www.linkedin.com/posts/pascal-musabyimana-573b66178_hey-linkedin-network-i-have-decided-activity-7153396537753030657-_Vzm?utm_source=share&utm_medium=member_desktop",
+    title: "Football Player & Ball Detection",
+    description:
+      "Filmed an FC Berdi indoor soccer match and trained YOLOv8 on the footage to detect players and the ball — custom dataset labeled in Roboflow, training tracked with ClearML, detection on single frames and full video.",
+    href: "https://universe.roboflow.com/pascalmaker/fcberdi",
     image: portfolioVisionDemo,
-    alt: "Applied AI project update image",
-    tags: ["Prototype", "AI", "LinkedIn"],
+    alt: "Player and ball detection on FC Berdi indoor soccer match footage",
+    tags: ["YOLOv8", "Roboflow", "Sports analytics"],
   },
   {
     title: "Brain Tumor Detection",
@@ -136,7 +137,7 @@ const organizations = [
   {
     name: "Sweetspot",
     image: sweetspotLogo,
-    href: "https://www.sweetspot.com/",
+    href: "https://sweetspotexperts.com/",
     alt: "Sweetspot logo",
   },
   {
