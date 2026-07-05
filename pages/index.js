@@ -13,6 +13,7 @@ import easypostLogo from "../public/0x0.png";
 import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
+import haroldPhoto from "../public/harold.jpg";
 import web1 from "../public/kanyesax.jpg";
 import web2 from "../public/mriscans.jpg";
 import web3 from "../public/segmentfetus.jpg";
@@ -108,7 +109,7 @@ const portfolioItems = [
   {
     title: "SAM 2 Segmentation",
     description: "Segmentation comparison work connected to the brain-tumor detection article.",
-    href: "https://huggingface.co/pascal-maker",
+    href: "https://medium.com/@pascalmusa/brain-tumor-detection-yolov8-vs-sam-2-7a19ad44efb4",
     image: web6,
     alt: "SAM 2 segmentation masks for medical-imaging experiment",
     tags: ["SAM 2", "Segmentation", "Hugging Face"],
@@ -121,6 +122,7 @@ const testimonials = [
       "It was a real pleasure having you in our IT department. Your enthusiasm was contagious, and your innovative mindset brought fresh energy to our team. The experiments you conducted pushed our AI capabilities a step forward—both useful in application and bold in approach. Your contributions were a perfect blend of technical depth and curiosity. Wishing you the best in what comes next. Keep experimenting!",
     name: "Harold Kerckhaert",
     role: "IT Director",
+    image: haroldPhoto,
   },
 ];
 
@@ -550,9 +552,20 @@ export default function Home() {
                   <blockquote className="leading-8 text-gray-700 dark:text-gray-300">
                     {testimonial.quote}
                   </blockquote>
-                  <figcaption className="mt-4">
-                    <span className="font-semibold text-gray-950 dark:text-white">{testimonial.name}</span>
-                    <span className="block text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</span>
+                  <figcaption className="mt-5 flex items-center gap-4">
+                    {testimonial.image && (
+                      <Image
+                        src={testimonial.image}
+                        width={56}
+                        height={56}
+                        alt={`Portrait of ${testimonial.name}`}
+                        className="h-14 w-14 rounded-full object-cover"
+                      />
+                    )}
+                    <span>
+                      <span className="block font-semibold text-gray-950 dark:text-white">{testimonial.name}</span>
+                      <span className="block text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</span>
+                    </span>
                   </figcaption>
                 </figure>
               ))}
