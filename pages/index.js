@@ -22,7 +22,7 @@ import web6 from "../public/sam2.jpg";
 
 const siteUrl = "https://pascal-maker.github.io/";
 const email = "pascal-musa@hotmail.com";
-const formspreeFormId = "mjgqlrde";
+const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "formspree-form-id-not-configured";
 
 const navigationItems = [
   { label: "Services", href: "#services" },
@@ -167,17 +167,20 @@ const jsonLd = {
 };
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    const savedTheme = window.localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return savedTheme ? savedTheme === "dark" : prefersDark;
+  });
   const [formState, handleFormSubmit] = useForm(formspreeFormId);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const resumeHref = "/Pascal_Musabyimana_Resume_EN.pdf";
-
-  useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDarkMode(savedTheme ? savedTheme === "dark" : prefersDark);
-  }, []);
+  const isContactFormConfigured = formspreeFormId !== "formspree-form-id-not-configured";
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -520,7 +523,6 @@ export default function Home() {
             {portfolioItems.map((item) => {
               const media = item.video ? (
                 <div className="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800">
-                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                   <video
                     controls
                     playsInline
@@ -641,7 +643,20 @@ export default function Home() {
               </div>
             </div>
 
-            {formState.succeeded ? (
+            {!isContactFormConfigured ? (
+              <div className="flex flex-col justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-800 dark:bg-gray-900">
+                <p className="text-xl font-semibold text-gray-950 dark:text-white">Email is the fastest route.</p>
+                <p className="mt-3 leading-7 text-gray-700 dark:text-gray-300">
+                  Send the project context directly and I&apos;ll reply from there.
+                </p>
+                <a
+                  href={`mailto:${email}`}
+                  className="mt-6 inline-flex justify-center rounded-lg bg-teal-600 px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-teal-700"
+                >
+                  Email Pascal
+                </a>
+              </div>
+            ) : formState.succeeded ? (
               <div className="flex flex-col justify-center rounded-lg border border-teal-200 bg-teal-50 p-8 text-center dark:border-teal-900 dark:bg-teal-950">
                 <p className="text-xl font-semibold text-teal-800 dark:text-teal-200">Thanks for your message!</p>
                 <p className="mt-3 leading-7 text-teal-700 dark:text-teal-300">
