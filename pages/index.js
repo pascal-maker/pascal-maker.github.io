@@ -155,16 +155,57 @@ const organizations = [
   },
 ];
 
-const jsonLd = {
+const siteTitle = "Pascal Musabyimana | AI & Computer Vision Engineer";
+const siteDescription =
+  "Pascal Musabyimana is an AI and computer vision engineer building computer-vision proofs of concept, AI integrations, and focused websites.";
+
+const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${siteUrl}#pascal-musabyimana`,
   name: "Pascal Musabyimana",
+  alternateName: ["pascal-maker", "Pascal Musa"],
+  givenName: "Pascal",
+  familyName: "Musabyimana",
+  description: siteDescription,
   jobTitle: "AI & Computer Vision Engineer",
   url: siteUrl,
+  image: `${siteUrl}valencia.jpg`,
   email: `mailto:${email}`,
+  mainEntityOfPage: siteUrl,
   sameAs: socialLinks.filter((link) => link.label !== "Email").map((link) => link.href),
   knowsAbout: ["Computer Vision", "Artificial Intelligence", "Next.js", "YOLOv8", "OpenCV", "Roboflow"],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Howest University of Applied Sciences",
+  },
 };
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}#website`,
+  name: "Pascal Musabyimana",
+  url: siteUrl,
+  description: siteDescription,
+  publisher: {
+    "@id": `${siteUrl}#pascal-musabyimana`,
+  },
+};
+
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${siteUrl}#profile-page`,
+  url: siteUrl,
+  name: siteTitle,
+  description: siteDescription,
+  mainEntity: {
+    "@id": `${siteUrl}#pascal-musabyimana`,
+  },
+};
+
+const structuredData = [personJsonLd, websiteJsonLd, profilePageJsonLd];
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -200,34 +241,49 @@ export default function Home() {
   return (
     <div className={darkMode ? "dark" : ""}>
       <Head>
-        <title>Pascal Musabyimana | AI & Computer Vision Engineer</title>
+        <title>{siteTitle}</title>
         <meta
           name="description"
-          content="Pascal Musabyimana builds computer-vision proofs of concept, AI integrations, and focused websites for founders and small teams."
+          content={siteDescription}
         />
+        <meta name="author" content="Pascal Musabyimana" />
+        <meta
+          name="keywords"
+          content="Pascal Musabyimana, pascal-maker, AI engineer, computer vision engineer, Next.js developer, YOLOv8, OpenCV, Roboflow"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="theme-color" content="#0f766e" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href={siteUrl} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="me" href="https://github.com/pascal-maker" />
+        <link rel="me" href="https://be.linkedin.com/in/pascal-musabyimana-573b66178" />
+        <link rel="me" href="https://huggingface.co/pascal-maker" />
+        <link rel="me" href="https://x.com/pascalmusa51964?s=11" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
-        <meta property="og:title" content="Pascal Musabyimana | AI & Computer Vision Engineer" />
+        <meta property="og:site_name" content="Pascal Musabyimana" />
+        <meta property="og:title" content={siteTitle} />
         <meta
           property="og:description"
-          content="Computer-vision proofs of concept, AI solutions, and websites that help ideas become testable products."
+          content={siteDescription}
         />
         <meta property="og:image" content={`${siteUrl}og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Pascal Musabyimana | AI & Computer Vision Engineer" />
+        <meta name="twitter:site" content="@pascalmusa51964" />
+        <meta name="twitter:creator" content="@pascalmusa51964" />
+        <meta name="twitter:title" content={siteTitle} />
         <meta
           name="twitter:description"
-          content="Computer-vision proofs of concept, AI solutions, and conversion-focused websites."
+          content={siteDescription}
         />
         <meta name="twitter:image" content={`${siteUrl}og-image.jpg`} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
 
