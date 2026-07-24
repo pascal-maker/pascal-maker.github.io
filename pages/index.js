@@ -127,10 +127,16 @@ const portfolioItems = [
 const testimonials = [
   {
     quote:
-      "It was a real pleasure having you in our IT department. Your enthusiasm was contagious, and your innovative mindset brought fresh energy to our team. The experiments you conducted pushed our AI capabilities a step forward—both useful in application and bold in approach. Your contributions were a perfect blend of technical depth and curiosity. Wishing you the best in what comes next. Keep experimenting!",
+      "Pascal brought contagious enthusiasm and an innovative mindset to our IT team. His Postman Detective project is still used successfully every month, with the same core now trained on newer datasets and improved reporting so it can run across all customers in a single-day process.",
     name: "Harold Kerckhaert",
     role: "IT Director, EasyPost",
     image: haroldPhoto,
+  },
+  {
+    quote:
+      "The workflow was practical enough to automate with a small JavaScript script, and the Postman Detective work is now also being reused to collect data for a new project.",
+    name: "Project collaborator",
+    role: "Automation workflow user",
   },
 ];
 
