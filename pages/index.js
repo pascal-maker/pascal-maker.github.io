@@ -27,6 +27,7 @@ const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "formspree-
 const navigationItems = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#portfolio" },
+  { label: "Repo Graphs", href: "#repo-graphs" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -123,6 +124,23 @@ const portfolioItems = [
     tags: ["SAM 2", "Segmentation", "Hugging Face"],
   },
 ];
+
+const repositoryGraph = {
+  title: "Pascal-maker Repository Knowledge Graph",
+  description:
+    "An interactive map across selected GitHub repositories, connecting frontend code, medical VLM experiments, discovery-report agents, data visualization work, and MLX projects.",
+  graphHref: "/knowledge-graphs/pascal-maker-repos.html",
+  reportHref: "/knowledge-graphs/pascal-maker-repos-report.md",
+  jsonHref: "/knowledge-graphs/pascal-maker-repos.json",
+  repos: [
+    "pascal-maker.github.io",
+    "medicalvlm",
+    "discovery-report-agents",
+    "datavisualization",
+    "mlxs",
+  ],
+  stats: ["3,666 nodes", "7,045 edges", "262 communities"],
+};
 
 const testimonials = [
   {
@@ -650,6 +668,82 @@ export default function Home() {
                 </a>
               );
             })}
+          </div>
+        </section>
+
+        <section id="repo-graphs" className="scroll-mt-24 px-4 py-16 sm:px-6 md:px-12 lg:px-24 xl:px-32">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(18rem,0.85fr)] lg:items-start">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
+                Repository Graphs
+              </p>
+              <h2 className="text-3xl font-semibold text-gray-950 dark:text-white sm:text-4xl">
+                Explore my GitHub work as an interactive knowledge graph.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-gray-700 dark:text-gray-300">
+                This graph turns several of my repositories into a browsable map of modules, functions, classes, and relationships. It is a faster way to inspect how my codebases are structured than opening each repository from scratch.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={repositoryGraph.graphHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center rounded-lg bg-teal-600 px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-teal-700"
+                >
+                  Open knowledge graph
+                </a>
+                <a
+                  href={repositoryGraph.reportHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center rounded-lg border border-gray-300 px-5 py-3 text-base font-semibold text-gray-900 transition-colors hover:border-teal-600 hover:text-teal-700 dark:border-gray-700 dark:text-white dark:hover:border-teal-400 dark:hover:text-teal-300"
+                >
+                  Read graph report
+                </a>
+              </div>
+            </div>
+
+            <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-950 dark:text-white">{repositoryGraph.title}</h3>
+                  <p className="mt-3 leading-7 text-gray-700 dark:text-gray-300">{repositoryGraph.description}</p>
+                </div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gray-950 text-2xl text-white dark:bg-white dark:text-gray-950">
+                  <AiFillGithub aria-hidden="true" />
+                </div>
+              </div>
+
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {repositoryGraph.stats.map((stat) => (
+                  <div key={stat} className="rounded-lg bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-800 dark:bg-gray-950 dark:text-gray-200">
+                    {stat}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                  Included repos
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {repositoryGraph.repos.map((repo) => (
+                    <span key={repo} className="rounded-full bg-teal-50 px-3 py-1 text-sm font-medium text-teal-800 dark:bg-teal-950 dark:text-teal-200">
+                      {repo}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
+                <a href={repositoryGraph.graphHref} target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 dark:text-teal-300 dark:hover:text-teal-100">
+                  Interactive graph
+                </a>
+                <a href={repositoryGraph.jsonHref} target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 dark:text-teal-300 dark:hover:text-teal-100">
+                  Graph JSON
+                </a>
+              </div>
+            </article>
           </div>
         </section>
 
