@@ -128,18 +128,16 @@ const portfolioItems = [
 const repositoryGraph = {
   title: "Pascal-maker Repository Knowledge Graph",
   description:
-    "An interactive map across selected GitHub repositories, connecting frontend code, medical VLM experiments, discovery-report agents, data visualization work, and MLX projects.",
+    "An interactive map across three selected GitHub repositories, connecting this portfolio site, discovery-report agents, and data visualization work.",
   graphHref: "/knowledge-graphs/pascal-maker-repos.html",
   reportHref: "/knowledge-graphs/pascal-maker-repos-report.md",
   jsonHref: "/knowledge-graphs/pascal-maker-repos.json",
   repos: [
     "pascal-maker.github.io",
-    "medicalvlm",
     "discovery-report-agents",
     "datavisualization",
-    "mlxs",
   ],
-  stats: ["3,666 nodes", "7,045 edges", "262 communities"],
+  stats: ["811 nodes", "1,436 edges", "59 communities"],
 };
 
 const testimonials = [
@@ -681,7 +679,7 @@ export default function Home() {
                 Explore my GitHub work as an interactive knowledge graph.
               </h2>
               <p className="mt-5 text-lg leading-8 text-gray-700 dark:text-gray-300">
-                This graph turns several of my repositories into a browsable map of modules, functions, classes, and relationships. It is a faster way to inspect how my codebases are structured than opening each repository from scratch.
+                This graph turns three repositories into a browsable map of modules, functions, classes, and relationships. It is a faster way to inspect how my codebases are structured than opening each repository from scratch.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a

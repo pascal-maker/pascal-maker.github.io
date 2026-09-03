@@ -8,34 +8,40 @@ const graph = JSON.parse(fs.readFileSync(graphPath, "utf8"));
 
 const nodes = graph.nodes || [];
 const links = graph.links || [];
-const degree = new Map();
-for (const edge of links) {
-  degree.set(edge.source, (degree.get(edge.source) || 0) + 1);
-  degree.set(edge.target, (degree.get(edge.target) || 0) + 1);
-}
 
 const repoMeta = {
+  website: { label: "Personal Website", color: "#fb7185", angle: -1.5, radius: 920, spread: 360 },
+  "discovery-report-agents": { label: "Discovery Agents", color: "#a78bfa", angle: 0.2, radius: 720, spread: 640 },
+  datavisualization: { label: "Data Visualization", color: "#f59e0b", angle: 2.1, radius: 780, spread: 660 },
   medicalvlm: { label: "Medical VLM", color: "#38bdf8", angle: -0.2, radius: 0, spread: 1550 },
-  datavisualization: { label: "Data Visualization", color: "#f59e0b", angle: -1.8, radius: 1850, spread: 760 },
-  "discovery-report-agents": { label: "Discovery Agents", color: "#a78bfa", angle: 1.85, radius: 1850, spread: 740 },
   mlxs: { label: "MLX Experiments", color: "#34d399", angle: 0.95, radius: 1900, spread: 660 },
-  website: { label: "Personal Website", color: "#fb7185", angle: -0.95, radius: 1900, spread: 440 },
 };
 
-const repoOrder = Object.keys(repoMeta);
+const repoOrder = ["website", "discovery-report-agents", "datavisualization"];
+const selectedRepos = new Set(repoOrder);
 const grouped = new Map(repoOrder.map((repo) => [repo, []]));
 for (const node of nodes) {
   const repo = node.repo || String(node.id).split("::")[0] || "unknown";
   node.repo = repo;
-  node.degree = degree.get(node.id) || 0;
-  if (!grouped.has(repo)) grouped.set(repo, []);
+  if (!selectedRepos.has(repo)) continue;
   grouped.get(repo).push(node);
+}
+
+const selectedNodeIds = new Set([...grouped.values()].flat().map((node) => node.id));
+const selectedLinks = links.filter((edge) => selectedNodeIds.has(edge.source) && selectedNodeIds.has(edge.target));
+const degree = new Map();
+for (const edge of selectedLinks) {
+  degree.set(edge.source, (degree.get(edge.source) || 0) + 1);
+  degree.set(edge.target, (degree.get(edge.target) || 0) + 1);
 }
 
 for (const [repo, repoNodes] of grouped) {
   const meta = repoMeta[repo] || { color: "#94a3b8", angle: 0, radius: 2400, spread: 650 };
   const cx = Math.cos(meta.angle) * meta.radius;
   const cy = Math.sin(meta.angle) * meta.radius;
+  repoNodes.forEach((node) => {
+    node.degree = degree.get(node.id) || 0;
+  });
   repoNodes.sort((a, b) => b.degree - a.degree || String(a.label).localeCompare(String(b.label)));
   repoNodes.forEach((node, index) => {
     const theta = index * 2.399963229728653;
@@ -47,7 +53,9 @@ for (const [repo, repoNodes] of grouped) {
   });
 }
 
-const topNodes = [...nodes]
+const selectedNodes = repoOrder.flatMap((repo) => grouped.get(repo) || []);
+
+const topNodes = [...selectedNodes]
   .sort((a, b) => b.degree - a.degree)
   .slice(0, 10)
   .map((node) => ({
@@ -58,7 +66,7 @@ const topNodes = [...nodes]
   }));
 
 const payload = {
-  nodes: nodes.map((node) => ({
+  nodes: selectedNodes.map((node) => ({
     id: node.id,
     label: node.label,
     repo: node.repo,
@@ -72,11 +80,16 @@ const payload = {
     size: node.size,
     color: node.color,
   })),
-  links: links.map((edge) => ({
+  links: selectedLinks.map((edge) => ({
     source: edge.source,
     target: edge.target,
     relation: edge.relation,
     confidence: edge.confidence,
+    confidence_score: edge.confidence_score,
+    context: edge.context,
+    source_file: edge.source_file,
+    source_location: edge.source_location,
+    weight: edge.weight,
   })),
   repos: repoOrder.map((repo) => ({
     key: repo,
@@ -85,9 +98,9 @@ const payload = {
     nodes: grouped.get(repo)?.length || 0,
   })),
   stats: {
-    nodes: nodes.length,
-    links: links.length,
-    communities: new Set(nodes.map((node) => node.community)).size,
+    nodes: selectedNodes.length,
+    links: selectedLinks.length,
+    communities: new Set(selectedNodes.map((node) => node.community)).size,
   },
   topNodes,
 };
@@ -158,7 +171,7 @@ const html = String.raw`<!DOCTYPE html>
     <section class="topbar">
       <p class="eyebrow">Repository Knowledge Graph</p>
       <h1>Pascal-maker repos, mapped.</h1>
-      <p class="subtitle">Five selected repositories laid out as readable clusters. Search a symbol, click a node, drag to pan, scroll to zoom.</p>
+      <p class="subtitle">Three selected repositories laid out as readable clusters. Search a symbol, click a node or edge, drag to pan, scroll to zoom.</p>
     </section>
     <div class="toolbar">
       <button id="fit">Fit graph</button>
@@ -185,8 +198,8 @@ const html = String.raw`<!DOCTYPE html>
       <div id="results" class="results"></div>
     </section>
     <section class="side-section details">
-      <h2>Node Info</h2>
-      <div id="details" class="footer-note">Click a node or search for a symbol to inspect its file, repo, degree, and neighbors.</div>
+      <h2>Selection Info</h2>
+      <div id="details" class="footer-note">Click a node, edge, or search result to inspect source files, relationships, degree, and neighbors.</div>
     </section>
   </aside>
   <script id="graph-data" type="application/json">${JSON.stringify(payload).replace(/</g, "\\u003c")}</script>
@@ -210,8 +223,11 @@ const html = String.raw`<!DOCTYPE html>
     let offsetY = 0;
     let dragging = false;
     let dragStart = null;
+    let dragMoved = false;
     let hovered = null;
+    let hoveredEdge = null;
     let selected = null;
+    let selectedEdge = null;
     let showEdges = true;
     const visibleRepos = new Set(data.repos.map(r => r.key));
 
@@ -246,9 +262,12 @@ const html = String.raw`<!DOCTYPE html>
           if (!a || !b || !visibleRepos.has(a.repo) || !visibleRepos.has(b.repo)) continue;
           const pa = project(a);
           const pb = project(b);
-          const active = selected && (link.source === selected.id || link.target === selected.id);
+          const selectedLink = selectedEdge === link;
+          const hoverLink = hoveredEdge === link;
+          const active = selectedLink || hoverLink || (selected && (link.source === selected.id || link.target === selected.id));
           if (!active && scale < 0.22 && a.degree < 8 && b.degree < 8) continue;
-          ctx.globalAlpha = active ? 0.72 : 0.08;
+          ctx.globalAlpha = selectedLink ? 0.95 : active ? 0.72 : 0.08;
+          ctx.lineWidth = selectedLink || hoverLink ? 2.2 : active ? 1.2 : 0.45;
           ctx.strokeStyle = active ? '#e2e8f0' : a.color;
           ctx.beginPath();
           ctx.moveTo(pa.x, pa.y);
@@ -262,8 +281,9 @@ const html = String.raw`<!DOCTYPE html>
         if (!visibleRepos.has(n.repo)) continue;
         const p = project(n);
         const r = Math.max(1.4, n.size * scale * 3.8);
-        const active = selected && (selected.id === n.id || (adjacency.get(selected.id) || []).some(nb => nb.id === n.id));
-        ctx.globalAlpha = selected ? (active ? 1 : 0.24) : 0.92;
+        const edgeActive = selectedEdge && (selectedEdge.source === n.id || selectedEdge.target === n.id);
+        const active = edgeActive || (selected && (selected.id === n.id || (adjacency.get(selected.id) || []).some(nb => nb.id === n.id)));
+        ctx.globalAlpha = selected || selectedEdge ? (active ? 1 : 0.24) : 0.92;
         ctx.fillStyle = n.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
@@ -288,7 +308,7 @@ const html = String.raw`<!DOCTYPE html>
         if (!visibleRepos.has(n.repo)) continue;
         const p = project(n);
         const d = Math.hypot(p.x - x, p.y - y);
-        const hit = Math.max(8, n.size * scale * 5);
+        const hit = Math.max(10, n.size * scale * 5, scale < 0.12 ? 13 : 0);
         if (d < hit && d < bestDist) {
           best = n;
           bestDist = d;
@@ -297,8 +317,42 @@ const html = String.raw`<!DOCTYPE html>
       return best;
     }
 
+    function distanceToSegment(px, py, ax, ay, bx, by) {
+      const dx = bx - ax;
+      const dy = by - ay;
+      if (dx === 0 && dy === 0) return Math.hypot(px - ax, py - ay);
+      const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)));
+      return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+    }
+
+    function nearestEdge(clientX, clientY) {
+      if (!showEdges) return null;
+      const rect = canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      let best = null;
+      let bestDist = Infinity;
+      const hit = scale < 0.16 ? 8 : 10;
+      for (const link of links) {
+        const a = byId.get(link.source);
+        const b = byId.get(link.target);
+        if (!a || !b || !visibleRepos.has(a.repo) || !visibleRepos.has(b.repo)) continue;
+        const active = selected && (link.source === selected.id || link.target === selected.id);
+        if (!active && scale < 0.22 && a.degree < 8 && b.degree < 8) continue;
+        const pa = project(a);
+        const pb = project(b);
+        const d = distanceToSegment(x, y, pa.x, pa.y, pb.x, pb.y);
+        if (d < hit && d < bestDist) {
+          best = link;
+          bestDist = d;
+        }
+      }
+      return best;
+    }
+
     function inspect(node) {
       selected = node;
+      selectedEdge = null;
       const detail = document.getElementById('details');
       const neighbors = (adjacency.get(node.id) || [])
         .map(nb => ({ ...nb, node: byId.get(nb.id) }))
@@ -321,10 +375,33 @@ const html = String.raw`<!DOCTYPE html>
       draw();
     }
 
+    function inspectEdge(edge) {
+      selected = null;
+      selectedEdge = edge;
+      const source = byId.get(edge.source);
+      const target = byId.get(edge.target);
+      const detail = document.getElementById('details');
+      detail.innerHTML = '<h3 class="detail-title">' + esc(source?.label || edge.source) + ' -> ' + esc(target?.label || edge.target) + '</h3>' +
+        '<div class="meta">' +
+        '<div><b>Relation:</b> ' + esc(edge.relation || 'related') + '</div>' +
+        '<div><b>Source repo:</b> ' + esc(source?.repo || 'unknown') + '</div>' +
+        '<div><b>Target repo:</b> ' + esc(target?.repo || 'unknown') + '</div>' +
+        '<div><b>Evidence:</b> ' + esc([edge.source_file, edge.source_location].filter(Boolean).join(' ') || edge.context || 'not provided') + '</div>' +
+        '<div><b>Confidence:</b> ' + esc([edge.confidence, edge.confidence_score].filter(v => v !== undefined && v !== null).join(' / ') || 'unknown') + '</div>' +
+        '</div>' +
+        '<div class="neighbors">' +
+        [source, target].filter(Boolean).map(n => '<button class="neighbor" data-id="' + escAttr(n.id) + '">' + esc(n.label) + '<br><small>' + esc(n.repo) + ' - degree ' + n.degree + '</small></button>').join('') +
+        '</div>';
+      detail.querySelectorAll('.neighbor').forEach(btn => {
+        btn.addEventListener('click', () => focusNode(byId.get(btn.dataset.id)));
+      });
+      draw();
+    }
+
     function focusNode(node) {
       if (!node) return;
       const rect = canvas.getBoundingClientRect();
-      scale = Math.max(scale, 0.35);
+      scale = Math.max(scale, 0.24);
       offsetX = -(node.x * scale);
       offsetY = -(node.y * scale);
       selected = node;
@@ -357,6 +434,7 @@ const html = String.raw`<!DOCTYPE html>
           if (input.checked) visibleRepos.add(input.dataset.repo);
           else visibleRepos.delete(input.dataset.repo);
           selected = null;
+          selectedEdge = null;
           draw();
         });
       });
@@ -375,15 +453,18 @@ const html = String.raw`<!DOCTYPE html>
       if (dragging) {
         offsetX = dragStart.offsetX + event.clientX - dragStart.x;
         offsetY = dragStart.offsetY + event.clientY - dragStart.y;
+        dragMoved = dragMoved || Math.hypot(event.clientX - dragStart.x, event.clientY - dragStart.y) > 4;
         draw();
         return;
       }
       hovered = nearest(event.clientX, event.clientY);
-      canvas.title = hovered ? hovered.label : '';
+      hoveredEdge = hovered ? null : nearestEdge(event.clientX, event.clientY);
+      canvas.title = hovered ? hovered.label : hoveredEdge ? (hoveredEdge.relation || 'edge') : '';
       draw();
     });
     canvas.addEventListener('mousedown', event => {
       dragging = true;
+      dragMoved = false;
       canvas.classList.add('dragging');
       dragStart = { x: event.clientX, y: event.clientY, offsetX, offsetY };
     });
@@ -392,22 +473,28 @@ const html = String.raw`<!DOCTYPE html>
       canvas.classList.remove('dragging');
     });
     canvas.addEventListener('click', event => {
+      if (dragMoved) return;
       const node = nearest(event.clientX, event.clientY);
-      if (node) inspect(node);
+      if (node) {
+        inspect(node);
+        return;
+      }
+      const edge = nearestEdge(event.clientX, event.clientY);
+      if (edge) inspectEdge(edge);
     });
     canvas.addEventListener('wheel', event => {
       event.preventDefault();
       const rect = canvas.getBoundingClientRect();
       const before = screenToWorld(event.clientX - rect.left, event.clientY - rect.top);
       const factor = event.deltaY < 0 ? 1.12 : 0.89;
-      scale = Math.max(0.035, Math.min(1.8, scale * factor));
+      scale = Math.max(0.02, Math.min(1.4, scale * factor));
       offsetX = event.clientX - rect.left - rect.width / 2 - before.x * scale;
       offsetY = event.clientY - rect.top - rect.height / 2 - before.y * scale;
       draw();
     }, { passive: false });
 
     document.getElementById('fit').addEventListener('click', fitGraph);
-    document.getElementById('edges').addEventListener('click', () => { showEdges = !showEdges; draw(); });
+    document.getElementById('edges').addEventListener('click', () => { showEdges = !showEdges; hoveredEdge = null; selectedEdge = null; draw(); });
     document.getElementById('search').addEventListener('input', e => renderResults(e.target.value));
     window.addEventListener('resize', resize);
     renderRepos();
