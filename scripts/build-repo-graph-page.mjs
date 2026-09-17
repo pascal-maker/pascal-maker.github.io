@@ -476,7 +476,7 @@ const html = String.raw`<!DOCTYPE html>
       if (dragMoved) return;
       const node = nearest(event.clientX, event.clientY);
       if (node) {
-        inspect(node);
+        focusNode(node);
         return;
       }
       const edge = nearestEdge(event.clientX, event.clientY);
