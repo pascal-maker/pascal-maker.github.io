@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const graphPath = path.join(root, "public/knowledge-graphs/pascal-maker-repos.json");
 const outPath = path.join(root, "public/knowledge-graphs/pascal-maker-repos.html");
+const statsPath = path.join(root, "public/knowledge-graphs/pascal-maker-repos-stats.json");
 const graph = JSON.parse(fs.readFileSync(graphPath, "utf8"));
 
 const nodes = graph.nodes || [];
@@ -65,6 +66,12 @@ const topNodes = [...selectedNodes]
     degree: node.degree,
   }));
 
+const stats = {
+  nodes: selectedNodes.length,
+  links: selectedLinks.length,
+  communities: new Set(selectedNodes.map((node) => node.community)).size,
+};
+
 const payload = {
   nodes: selectedNodes.map((node) => ({
     id: node.id,
@@ -97,13 +104,11 @@ const payload = {
     color: repoMeta[repo].color,
     nodes: grouped.get(repo)?.length || 0,
   })),
-  stats: {
-    nodes: selectedNodes.length,
-    links: selectedLinks.length,
-    communities: new Set(selectedNodes.map((node) => node.community)).size,
-  },
+  stats,
   topNodes,
 };
+
+fs.writeFileSync(statsPath, `${JSON.stringify(stats, null, 2)}\n`);
 
 const html = String.raw`<!DOCTYPE html>
 <html lang="en">

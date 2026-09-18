@@ -15,10 +15,10 @@ import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
 import haroldPhoto from "../public/harold.jpg";
 import web1 from "../public/kanyesax.jpg";
-import web2 from "../public/mriscans.jpg";
 import web3 from "../public/segmentfetus.jpg";
 import web5 from "../public/braintumordetection.jpg";
 import web6 from "../public/sam2.jpg";
+import repositoryGraphStats from "../public/knowledge-graphs/pascal-maker-repos-stats.json";
 
 const siteUrl = "https://pascal-maker.github.io/";
 const email = "pascal-musa@hotmail.com";
@@ -28,6 +28,7 @@ const navigationItems = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#portfolio" },
   { label: "Repo Graphs", href: "#repo-graphs" },
+  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -81,15 +82,6 @@ const portfolioItems = [
     tags: ["AI demo", "Python", "Modeling"],
   },
   {
-    title: "MRI Scan Dataset Work",
-    description: "Medical-imaging project exploration using MRI scans and model experimentation.",
-    // TODO: Replace this fallback with the specific MRI-scans project link.
-    href: "https://github.com/pascal-maker",
-    image: web2,
-    alt: "MRI scan grid used for medical-imaging computer vision work",
-    tags: ["Medical imaging", "Computer vision", "Dataset work"],
-  },
-  {
     title: "Fetus Segmentation",
     description: "Segmentation workflow shared as a Meta and computer-vision learning project.",
     href: "https://www.linkedin.com/posts/pascal-musabyimana-573b66178_meta-computervision-segmentation-activity-7169017148386840576-4GCh?utm_source=share&utm_medium=member_desktop",
@@ -137,8 +129,57 @@ const repositoryGraph = {
     "discovery-report-agents",
     "datavisualization",
   ],
-  stats: ["811 nodes", "1,436 edges", "59 communities"],
+  stats: [
+    `${repositoryGraphStats.nodes.toLocaleString("en-US")} nodes`,
+    `${repositoryGraphStats.links.toLocaleString("en-US")} edges`,
+    `${repositoryGraphStats.communities.toLocaleString("en-US")} communities`,
+  ],
 };
+
+const experienceItems = [
+  {
+    period: "Nov 2025 – Mar 2026",
+    role: "AI Solution Engineer",
+    organization: "Sweetspot Experts BV",
+    description: "Built AI solutions and internal tools while experimenting with ontologies, semantic chunking, and rapid prototyping.",
+  },
+  {
+    period: "Jun 2025",
+    role: "AI Intern",
+    organization: "EasyPost Belgium",
+    description: "Developed a computer-vision solution for anomaly detection and contributed to a workflow that continued to be reused after the internship.",
+  },
+  {
+    period: "Jun 2026",
+    role: "Volunteer",
+    organization: "Off the Radar",
+    description: "Supported end-to-end event planning, logistics, attendee coordination, and on-site execution for an invitation-only AI gathering in Brussels.",
+  },
+  {
+    period: "2021 – 2024",
+    role: "Independent product project",
+    organization: "Lovia",
+    description: "Bootstrapped a Tinder-like app for college students, covering UX, beta testing, GDPR, product updates, and MVP validation.",
+  },
+];
+
+const proofOfWork = [
+  {
+    title: "PANORAMA property-intelligence POC",
+    label: "Prototype",
+    description: "Prototyped a workflow for extracting property information, matching it to company needs, and keeping review in the hands of a broker.",
+  },
+  {
+    title: "Postman Detective",
+    label: "Used in practice",
+    description: "Built an automation workflow whose core continued to be reused for customer data collection and reporting after the original project.",
+  },
+  {
+    title: "FC Berdi player and ball detection",
+    label: "Computer vision",
+    description: "Filmed an indoor-soccer match, labeled a custom Roboflow dataset, trained YOLOv8, and ran detection on frames and full video.",
+  },
+];
 
 const testimonials = [
   {
@@ -459,7 +500,7 @@ export default function Home() {
                 Pascal Musabyimana
               </h1>
               <p className="mt-6 max-w-2xl text-xl leading-8 text-gray-700 dark:text-gray-200">
-                I build computer-vision proofs of concept, AI solutions, and the websites that help founders explain what they are building.
+                I turn early computer-vision and AI ideas into testable prototypes and practical workflows. I also build the focused websites that make technical work understandable.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -473,6 +514,14 @@ export default function Home() {
                   className="inline-flex justify-center rounded-lg border border-gray-300 px-5 py-3 text-base font-semibold text-gray-900 transition-colors hover:border-teal-600 hover:text-teal-700 dark:border-gray-700 dark:text-white dark:hover:border-teal-400 dark:hover:text-teal-300"
                 >
                   View selected work
+                </a>
+                <a
+                  href={resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center rounded-lg border border-gray-300 px-5 py-3 text-base font-semibold text-gray-900 transition-colors hover:border-teal-600 hover:text-teal-700 dark:border-gray-700 dark:text-white dark:hover:border-teal-400 dark:hover:text-teal-300"
+                >
+                  View resume
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap gap-4 text-3xl text-gray-600 dark:text-gray-300">
@@ -584,6 +633,44 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="experience" className="scroll-mt-24 border-y border-gray-100 bg-gray-50 px-4 py-16 dark:border-gray-800 dark:bg-gray-900 sm:px-6 md:px-12 lg:px-24 xl:px-32">
+          <div className="mb-8 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
+              Experience
+            </p>
+            <h2 className="text-3xl font-semibold text-gray-950 dark:text-white sm:text-4xl">
+              Technical work with people, products, and real constraints.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-gray-700 dark:text-gray-300">
+              My work sits between experimentation and delivery: I like building the first useful version, testing what holds up, and explaining it clearly to the people who need to use it.
+            </p>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            {experienceItems.map((item) => (
+              <article key={`${item.organization}-${item.period}`} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-teal-700 dark:text-teal-300">{item.period}</p>
+                <h3 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.role}</h3>
+                <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">{item.organization}</p>
+                <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">{item.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-2xl font-semibold text-gray-950 dark:text-white">Proof of work</h3>
+            <div className="mt-6 grid gap-6 md:grid-cols-3">
+              {proofOfWork.map((item) => (
+                <article key={item.title} className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-950">
+                  <p className="text-sm font-semibold uppercase tracking-[0.16em] text-teal-700 dark:text-teal-300">{item.label}</p>
+                  <h4 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.title}</h4>
+                  <p className="mt-3 leading-7 text-gray-700 dark:text-gray-300">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="portfolio" className="scroll-mt-24 bg-gray-50 px-4 py-16 dark:bg-gray-900 sm:px-6 md:px-12 lg:px-24 xl:px-32">
           <div className="mb-8 max-w-3xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
@@ -679,7 +766,7 @@ export default function Home() {
                 Explore my GitHub work as an interactive knowledge graph.
               </h2>
               <p className="mt-5 text-lg leading-8 text-gray-700 dark:text-gray-300">
-                This graph turns three repositories into a browsable map of modules, functions, classes, and relationships. It is a faster way to inspect how my codebases are structured than opening each repository from scratch.
+                This graph turns three selected repositories into a browsable map of modules, functions, classes, and relationships. Search a symbol, inspect its source location, and follow connected code instead of opening each repository from scratch.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
