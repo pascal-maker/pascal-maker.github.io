@@ -62,7 +62,7 @@ const serviceCards = [
     title: "AI Solutions & Integrations",
     description:
       "Practical AI features, evaluation loops, and automation flows for teams that need useful output instead of demos that only look impressive.",
-    tools: ["Python", "Next.js", "Docker", "Langfuse"],
+    tools: ["Python", "LLMs", "Docker", "MCP", "Agentic AI"],
     icon: HiOutlineCpuChip,
     iconWrapClass: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
   },
@@ -70,7 +70,7 @@ const serviceCards = [
     title: "Websites & Landing Pages",
     description:
       "Focused pages for founders, creators, and small teams that need a clear offer, a sharp visual presentation, and a path to contact.",
-    tools: ["React", "SEO", "UX", "Conversion"],
+    tools: ["React", "Next.js", "SEO", "UX", "Conversion"],
     icon: HiOutlineGlobeAlt,
     iconWrapClass: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
   },
