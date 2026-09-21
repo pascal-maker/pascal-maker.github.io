@@ -149,9 +149,9 @@ const experienceItems = [
   },
   {
     period: "Jun 2025",
-    role: "AI Intern",
+    role: "Student job",
     organization: "EasyPost Belgium",
-    description: "Developed a computer-vision solution for anomaly detection and contributed to a workflow that continued to be reused after the internship.",
+    description: "Developed a computer-vision solution for anomaly detection and contributed to a workflow that continued to be reused afterwards.",
   },
   {
     period: "Jun 2026",
@@ -669,7 +669,7 @@ export default function Home() {
                 <h3 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.role}</h3>
                 <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">{item.organization}</p>
                 {item.images && (
-                  <div className="mx-auto mt-5 flex w-fit max-w-full items-end justify-center gap-3 rounded-xl border border-gray-200 bg-gray-100 p-3 dark:border-gray-800 dark:bg-gray-900 sm:gap-4 sm:p-4">
+                  <div className="mx-auto mt-5 flex w-fit max-w-full items-end justify-center gap-3 sm:gap-4">
                     {item.images.map((image) => (
                       <div
                         key={image.alt}
