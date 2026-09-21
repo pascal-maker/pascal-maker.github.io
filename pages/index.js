@@ -177,6 +177,7 @@ const proofOfWork = [
     title: "FC Berdi player and ball detection",
     label: "Computer vision",
     description: "Filmed an indoor-soccer match, labeled a custom Roboflow dataset, trained YOLOv8, and ran detection on frames and full video.",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7153396537753030657/",
   },
   {
     title: "Luminus AI Energy Assistant",
