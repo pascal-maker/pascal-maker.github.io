@@ -14,6 +14,7 @@ import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
 import panoramaLogo from "../public/panorama-logo.png";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
+import hetVeerLogo from "../public/het-veer-logo.png";
 import loviaIcon from "../public/lovia-icon.webp";
 import loviaAppScreenshot from "../public/lovia-app.jpg";
 import web1 from "../public/kanyesax.jpg";
@@ -206,6 +207,13 @@ const organizations = [
     imageFit: "contain",
     href: "https://www.panorama.immo/nl",
     alt: "PANORAMA",
+  },
+  {
+    name: "Het Veer",
+    image: hetVeerLogo,
+    imageFit: "contain",
+    href: "https://www.het-veer.be/",
+    alt: "Het Veer logo",
   },
 ];
 
@@ -661,7 +669,7 @@ export default function Home() {
                 <h3 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.role}</h3>
                 <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">{item.organization}</p>
                 {item.images && (
-                  <div className="mt-5 flex items-end justify-center gap-3 rounded-xl border border-gray-200 bg-gray-100 p-3 dark:border-gray-800 dark:bg-gray-900 sm:gap-4 sm:p-4">
+                  <div className="mx-auto mt-5 flex w-fit max-w-full items-end justify-center gap-3 rounded-xl border border-gray-200 bg-gray-100 p-3 dark:border-gray-800 dark:bg-gray-900 sm:gap-4 sm:p-4">
                     {item.images.map((image) => (
                       <div
                         key={image.alt}
