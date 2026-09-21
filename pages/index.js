@@ -12,6 +12,7 @@ import deved from "../public/valencia.jpg";
 import easypostLogo from "../public/0x0.png";
 import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
+import panoramaLogo from "../public/panorama-logo.png";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
 import loviaIcon from "../public/lovia-icon.webp";
 import loviaAppScreenshot from "../public/lovia-app.jpg";
@@ -201,6 +202,9 @@ const organizations = [
   },
   {
     name: "PANORAMA",
+    image: panoramaLogo,
+    imageFit: "contain",
+    href: "https://www.panorama.immo/nl",
     alt: "PANORAMA",
   },
 ];
@@ -609,7 +613,9 @@ export default function Home() {
                           width={64}
                           height={64}
                           alt={organization.alt}
-                          className="h-16 w-16 rounded-lg border border-gray-200 object-cover dark:border-gray-800"
+                          className={`h-16 w-16 rounded-lg border border-gray-200 dark:border-gray-800 ${
+                            organization.imageFit === "contain" ? "object-contain" : "object-cover"
+                          }`}
                         />
                       ) : (
                         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-xs font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
