@@ -178,6 +178,14 @@ const proofOfWork = [
     label: "Computer vision",
     description: "Filmed an indoor-soccer match, labeled a custom Roboflow dataset, trained YOLOv8, and ran detection on frames and full video.",
   },
+  {
+    title: "Luminus AI Energy Assistant",
+    label: "Take-home proof of concept · Nimble Studio",
+    description:
+      "Built and deployed a multi-agent energy assistant with structured reasoning workflows. The assistant helps users understand energy billing, book service appointments, and receive personalized energy-saving recommendations using Eve, OpenAI, TypeScript, and custom tool functions.",
+    href: "https://energyagent-ten.vercel.app/",
+    companyHref: "https://www.nimblestudio.com/",
+  },
 ];
 
 const testimonials = [];
@@ -707,12 +715,26 @@ export default function Home() {
 
           <div className="mt-12">
             <h3 className="text-2xl font-semibold text-gray-950 dark:text-white">Proof of work</h3>
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
               {proofOfWork.map((item) => (
                 <article key={item.title} className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-950">
                   <p className="text-sm font-semibold uppercase tracking-[0.16em] text-teal-700 dark:text-teal-300">{item.label}</p>
                   <h4 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.title}</h4>
                   <p className="mt-3 leading-7 text-gray-700 dark:text-gray-300">{item.description}</p>
+                  {(item.href || item.companyHref) && (
+                    <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+                      {item.href && (
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 dark:text-teal-300 dark:hover:text-teal-100">
+                          Live demo →
+                        </a>
+                      )}
+                      {item.companyHref && (
+                        <a href={item.companyHref} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-teal-700 dark:text-gray-300 dark:hover:text-teal-300">
+                          Nimble Studio →
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
