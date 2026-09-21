@@ -13,7 +13,6 @@ import easypostLogo from "../public/0x0.png";
 import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
-import haroldPhoto from "../public/harold.jpg";
 import loviaIcon from "../public/lovia-icon.webp";
 import loviaAppScreenshot from "../public/lovia-app.jpg";
 import web1 from "../public/kanyesax.jpg";
@@ -160,27 +159,18 @@ const experienceItems = [
   },
   {
     period: "2021 – 2024",
-    role: "Independent product project",
+    role: "Founder",
     organization: "Lovia",
-    description: "Bootstrapped a Tinder-like app for college students, covering UX, beta testing, GDPR, product updates, and MVP validation.",
+    description: "Founded and bootstrapped Lovia, an app for meeting students, covering UX, beta testing, GDPR, product updates, and MVP validation.",
+    href: "https://apkpure.com/lovia/com.lovialove",
     images: [
-      { src: loviaIcon, alt: "Lovia app icon" },
-      { src: loviaAppScreenshot, alt: "Lovia dating app promotional screen" },
+      { src: loviaIcon, alt: "Lovia app icon", orientation: "square" },
+      { src: loviaAppScreenshot, alt: "Lovia app promotional screen", orientation: "portrait" },
     ],
   },
 ];
 
 const proofOfWork = [
-  {
-    title: "PANORAMA property-intelligence POC",
-    label: "Prototype",
-    description: "Prototyped a workflow for extracting property information, matching it to company needs, and keeping review in the hands of a broker.",
-  },
-  {
-    title: "Postman Detective",
-    label: "Used in practice",
-    description: "Built an automation workflow whose core continued to be reused for customer data collection and reporting after the original project.",
-  },
   {
     title: "FC Berdi player and ball detection",
     label: "Computer vision",
@@ -188,21 +178,7 @@ const proofOfWork = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Pascal brought contagious enthusiasm and an innovative mindset to our IT team. His Postman Detective project is still used successfully every month, with the same core now trained on newer datasets and improved reporting so it can run across all customers in a single-day process.",
-    name: "Harold Kerckhaert",
-    role: "IT Director, EasyPost",
-    image: haroldPhoto,
-  },
-  {
-    quote:
-      "The workflow was practical enough to automate with a small JavaScript script, and the Postman Detective work is now also being reused to collect data for a new project.",
-    name: "Project collaborator",
-    role: "Automation workflow user",
-  },
-];
+const testimonials = [];
 
 const organizations = [
   {
@@ -222,6 +198,10 @@ const organizations = [
     image: offTheRadarPhoto,
     href: "https://off-the-radar.com/",
     alt: "Off the Radar event poster",
+  },
+  {
+    name: "PANORAMA",
+    alt: "PANORAMA",
   },
 ];
 
@@ -617,24 +597,39 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-semibold text-gray-950 dark:text-white">Companies / Organizations I Worked With</h3>
               <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                {organizations.map((organization) => (
-                  <a
-                    key={organization.name}
-                    href={organization.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 rounded-lg border border-gray-200 p-4 transition-colors hover:border-teal-500 dark:border-gray-800 dark:hover:border-teal-400"
-                  >
-                    <Image
-                      src={organization.image}
-                      width={64}
-                      height={64}
-                      alt={organization.alt}
-                      className="h-16 w-16 rounded-lg border border-gray-200 object-cover dark:border-gray-800"
-                    />
-                    <span className="font-medium text-gray-800 dark:text-gray-200">{organization.name}</span>
-                  </a>
-                ))}
+                {organizations.map((organization) => {
+                  const cardClass = `flex items-center gap-4 rounded-lg border border-gray-200 p-4 dark:border-gray-800 ${
+                    organization.href ? "transition-colors hover:border-teal-500 dark:hover:border-teal-400" : ""
+                  }`;
+                  const content = (
+                    <>
+                      {organization.image ? (
+                        <Image
+                          src={organization.image}
+                          width={64}
+                          height={64}
+                          alt={organization.alt}
+                          className="h-16 w-16 rounded-lg border border-gray-200 object-cover dark:border-gray-800"
+                        />
+                      ) : (
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-xs font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
+                          {organization.name}
+                        </div>
+                      )}
+                      <span className="font-medium text-gray-800 dark:text-gray-200">{organization.name}</span>
+                    </>
+                  );
+
+                  return organization.href ? (
+                    <a key={organization.name} href={organization.href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={organization.name} className={cardClass}>
+                      {content}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -660,11 +655,15 @@ export default function Home() {
                 <h3 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.role}</h3>
                 <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">{item.organization}</p>
                 {item.images && (
-                  <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="mt-5 flex items-end justify-center gap-3 rounded-xl border border-gray-200 bg-gray-100 p-3 dark:border-gray-800 dark:bg-gray-900 sm:gap-4 sm:p-4">
                     {item.images.map((image) => (
                       <div
                         key={image.alt}
-                        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-900"
+                        className={
+                          image.orientation === "portrait"
+                            ? "relative h-40 w-[4.625rem] overflow-hidden rounded-lg sm:h-60 sm:w-[6.875rem]"
+                            : "relative h-40 w-40 overflow-hidden rounded-lg sm:h-60 sm:w-60"
+                        }
                       >
                         <Image
                           src={image.src}
@@ -678,6 +677,16 @@ export default function Home() {
                   </div>
                 )}
                 <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">{item.description}</p>
+                {item.href && (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex font-semibold text-teal-700 hover:text-teal-900 dark:text-teal-300 dark:hover:text-teal-100"
+                  >
+                    View Lovia on APKPure →
+                  </a>
+                )}
               </article>
             ))}
           </div>
