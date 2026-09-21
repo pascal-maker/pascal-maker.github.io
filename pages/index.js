@@ -6,7 +6,7 @@ import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { FaEnvelope, FaXTwitter } from "react-icons/fa6";
 import { HiBars3, HiXMark, HiOutlineEye, HiOutlineCpuChip, HiOutlineGlobeAlt } from "react-icons/hi2";
-import { SiHuggingface } from "react-icons/si";
+import { SiGoodreads, SiHuggingface } from "react-icons/si";
 
 import deved from "../public/valencia.jpg";
 import easypostLogo from "../public/0x0.png";
@@ -14,6 +14,8 @@ import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
 import haroldPhoto from "../public/harold.jpg";
+import loviaIcon from "../public/lovia-icon.webp";
+import loviaAppScreenshot from "../public/lovia-app.jpg";
 import web1 from "../public/kanyesax.jpg";
 import web3 from "../public/segmentfetus.jpg";
 import web5 from "../public/braintumordetection.jpg";
@@ -42,6 +44,7 @@ const socialLinks = [
   },
   { label: "GitHub", href: "https://github.com/pascal-maker", icon: AiFillGithub },
   { label: "Hugging Face", href: "https://huggingface.co/pascal-maker", icon: SiHuggingface },
+  { label: "Goodreads", href: "https://www.goodreads.com/user/show/130555452-pascal-musabyimana", icon: SiGoodreads },
   { label: "Email", href: `mailto:${email}`, icon: FaEnvelope },
 ];
 
@@ -160,6 +163,10 @@ const experienceItems = [
     role: "Independent product project",
     organization: "Lovia",
     description: "Bootstrapped a Tinder-like app for college students, covering UX, beta testing, GDPR, product updates, and MVP validation.",
+    images: [
+      { src: loviaIcon, alt: "Lovia app icon" },
+      { src: loviaAppScreenshot, alt: "Lovia dating app promotional screen" },
+    ],
   },
 ];
 
@@ -652,6 +659,24 @@ export default function Home() {
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-teal-700 dark:text-teal-300">{item.period}</p>
                 <h3 className="mt-3 text-xl font-semibold text-gray-950 dark:text-white">{item.role}</h3>
                 <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">{item.organization}</p>
+                {item.images && (
+                  <div className="mt-5 grid grid-cols-2 gap-3">
+                    {item.images.map((image) => (
+                      <div
+                        key={image.alt}
+                        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-900"
+                      >
+                        <Image
+                          src={image.src}
+                          fill
+                          style={{ objectFit: "contain" }}
+                          alt={image.alt}
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">{item.description}</p>
               </article>
             ))}
