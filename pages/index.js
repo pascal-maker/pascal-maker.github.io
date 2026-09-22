@@ -596,10 +596,10 @@ export default function Home() {
               </h2>
               <div className="mt-6 space-y-5 text-lg leading-8 text-gray-700 dark:text-gray-300">
                 <p>
-                  I study at Howest University of Applied Sciences and build projects across AI, computer vision, and web development. My strongest work is turning early ideas into concrete prototypes that can be shown, tested, and improved.
+                  I studied Creative Technologies &amp; AI at Howest University of Applied Sciences, where I built projects across AI, computer vision, and web development. My strongest work is turning early ideas into concrete prototypes that can be shown, tested, and improved.
                 </p>
                 <p>
-                  If you need a landing page, a working proof of concept for a computer-vision project, or a clearer website for your business, I can help you move from a loose idea to something people can understand and contact you about.
+                  If you need a landing page, a working proof of concept for a computer-vision project, or a clearer website for your business, I can help turn a loose idea into something tangible that people can understand, test, and engage with.
                 </p>
               </div>
               <a href="#contact" className="mt-8 inline-flex rounded-lg bg-gray-950 px-5 py-3 font-semibold text-white transition-colors hover:bg-teal-700 dark:bg-white dark:text-gray-950 dark:hover:bg-teal-200">
