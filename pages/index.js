@@ -12,7 +12,6 @@ import deved from "../public/valencia.jpg";
 import easypostLogo from "../public/0x0.png";
 import offTheRadarPhoto from "../public/off-the-radar.jpg";
 import portfolioVisionDemo from "../public/portfolio-vision-demo.jpeg";
-import panoramaLogo from "../public/panorama-logo.png";
 import sweetspotLogo from "../public/sweetspot-logo.svg";
 import hetVeerLogo from "../public/het-veer-logo.png";
 import loviaIcon from "../public/lovia-icon.webp";
@@ -209,13 +208,6 @@ const organizations = [
     image: offTheRadarPhoto,
     href: "https://off-the-radar.com/",
     alt: "Off the Radar event poster",
-  },
-  {
-    name: "PANORAMA",
-    image: panoramaLogo,
-    imageFit: "contain",
-    href: "https://www.panorama.immo/nl",
-    alt: "PANORAMA",
   },
   {
     name: "Het Veer",
