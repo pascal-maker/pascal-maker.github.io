@@ -186,6 +186,13 @@ const proofOfWork = [
     href: "https://ask-karen.framer.website/live-demo",
     companyHref: "https://www.nimblestudio.com/",
   },
+  {
+    title: "EnergyAgent Karen",
+    label: "Live proof of concept",
+    description:
+      "Dutch voice and chat assistant for Belgian household energy questions. Answers from official supplier and regulator sources with the source passage shown, reads uploaded bills, and compares offers through the regional comparators.",
+    href: "/karen",
+  },
 ];
 
 const testimonials = [];
