@@ -179,14 +179,6 @@ const proofOfWork = [
     href: "https://www.linkedin.com/feed/update/urn:li:activity:7153396537753030657/",
   },
   {
-    title: "Karen — AI Energy Assistant for Belgium",
-    label: "Take-home proof of concept · Nimble Studio",
-    description:
-      "Built and deployed a multi-agent energy assistant covering 10+ Belgian energy suppliers, with billing explanations, offer comparisons, PDF invoice understanding, and voice playback.",
-    href: "https://ask-karen.framer.website/live-demo",
-    companyHref: "https://www.nimblestudio.com/",
-  },
-  {
     title: "EnergyAgent Karen",
     label: "Live proof of concept",
     description:
