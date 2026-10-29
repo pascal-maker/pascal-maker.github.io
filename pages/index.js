@@ -141,6 +141,12 @@ const repositoryGraph = {
 
 const experienceItems = [
   {
+    period: "Sep 2026 – Oct 2026",
+    role: "AI Specialist",
+    organization: "Het Veer",
+    description: "Used AI to improve day-to-day operations across ERP systems, dashboards, surveys, KPI reporting, process automation, and data analysis, helped colleagues adopt AI tools, and updated the company website with WordPress and Codex.",
+  },
+  {
     period: "Nov 2025 – Mar 2026",
     role: "AI Solution Engineer",
     organization: "Sweetspot Experts BV",
