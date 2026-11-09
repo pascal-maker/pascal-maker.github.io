@@ -189,7 +189,7 @@ const proofOfWork = [
     label: "Live proof of concept",
     description:
       "Dutch voice and chat assistant for Belgian household energy questions. Answers from official supplier and regulator sources with the source passage shown, reads uploaded bills, and compares offers through the regional comparators.",
-    href: "/karen",
+    href: "https://ask-karen.framer.website/",
   },
 ];
 
