@@ -188,7 +188,7 @@ const proofOfWork = [
     title: "EnergyAgent Karen",
     label: "Live proof of concept",
     description:
-      "Dutch voice and chat assistant for Belgian household energy questions. Answers from official supplier and regulator sources with the source passage shown, reads uploaded bills, and compares offers through the regional comparators.",
+      "Building an energy contract checker for Belgian households. Upload a bill or enter your details to compare energy prices and standing charges across verified tariff cards, with estimated yearly and monthly savings, calculations and sources shown. Currently covering Flanders, with chat and voice for additional help.",
     href: "https://ask-karen.framer.website/",
   },
 ];
